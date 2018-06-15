@@ -1,0 +1,45 @@
+## Install the Packages from the Ubuntu Repositories
+To begin the process, we'll download and install all of the items we need from the Ubuntu repositories. We will use the Python package manager `pip` to install additional components a bit later.
+Since we are using Django with Python 3, type:
+
+```
+sudo apt-get update
+
+sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx
+```
+This will install pip, the Python development files needed to build Gunicorn later, the Postgres database system and the libraries needed to interact with it, and the Nginx web server.
+
+## Create the PostgreSQL Database and User
+Log into an interactive Postgres session by typing:
+```
+sudo -u postgres psql
+```
+You will be given a PostgreSQL prompt where we can set up our requirements.
+
+First, create a database for our project:
+```
+CREATE DATABASE findbyid;
+```
+Next, create a database user for our project. Make sure to select a secure password:
+
+```
+CREATE USER admin WITH PASSWORD 'findbyidadmin';
+```
+
+We are going to set the default encoding to `UTF-8`, which Django expects. We are also setting the default transaction isolation scheme to "read committed", which blocks reads from uncommitted transactions. Lastly, we are setting the timezone. Our Django projects will be modified to use `Africa/Nairobi`:
+
+```
+ALTER ROLE admin SET client_encoding TO 'utf8';
+ALTER ROLE admin SET default_transaction_isolation TO 'read committed';
+ALTER ROLE admin SET timezone TO 'Africa/Nairobi';
+```
+
+Now, we can give our new user access to administer our new database:
+```
+GRANT ALL PRIVILEGES ON DATABASE findbyid TO admin;
+```
+
+When you are finished, exit out of the PostgreSQL prompt by typing:
+```
+\q
+```

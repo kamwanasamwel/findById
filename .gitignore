@@ -1,1 +1,5 @@
 git rm --cached FindById/settings.py
+**/__pycache__/**
+**/migrations/**
+**/.vscode/**
+db.sq**

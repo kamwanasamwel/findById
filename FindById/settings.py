@@ -67,8 +67,13 @@ WSGI_APPLICATION = 'FindById.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'findbyid',
+        'USER': 'admin',
+        'PASSWORD': 'findbyidadmin',
+        'HOST': 'localhost',
+        'PORT': '',
+        'ATOMIC_REQUEST': True,
     }
 }
 
@@ -110,7 +115,17 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_PATH = os.path.join(PROJECT_ROOT,'staticfiles')
 STATIC_URL = '/static/'
+<<<<<<< HEAD
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_DIRS = (STATIC_PATH,)
 
+=======
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+MEDIA_ROOT = '/media/kamwana/MASOMO/KTeam/findById/FindById/media/'
+
+MEDIA_URL = '/media/'
+>>>>>>> d8a67fb0ae64310a4c827db3683439734ee72375

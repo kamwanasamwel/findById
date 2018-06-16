@@ -16,4 +16,4 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['FirstName','LastName','surname', 'email', 'phoneNo', 'idno']
+        fields = ['FirstName','LastName','surname', 'email', 'phoneNo', 'idno']9

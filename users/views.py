@@ -1,19 +1,27 @@
 from django.shortcuts import render
+from .forms import UserForm, ProfileForm
 
-# Create your views here.
-def register_user(request):
+from django.conf import settings
+from django.db import transaction
+from django.contrib.auth.decorators import login_required
+
+@login_required
+@transaction.atomic()
+def update_profile(request):
     if request.method == 'POST':
-            register = RegisterForm(request.POST, prefix='register')
-            usrprofile = ProfileForm(request.POST, prefix='profile')
-            if register.is_valid() * usrprofile.is_valid():
-                user = register.save()
-                usrprof = usrprofile.save(commit=False)
-                usrprof.user = user
-                usrprof.save()
-                return HttpResponse('congrats')
-            else:
-                return HttpResponse('errors')
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, _('Your profile was successfully updated!'))
+            return redirect('settings:profile')
+        else:
+            messages.error(request, _('Please correct the error below.'))
     else:
-        userform = RegisterForm(prefix='register')
-        userprofileform = ProfileForm(prefix='profile')
-        return render(request, 'test/register.html', {'userform': userform, 'userprofileform': userprofileform})
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'test/register.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })

@@ -83,6 +83,7 @@ DATABASES = {
         'PASSWORD': 'findbyidadmin',
         'HOST': 'localhost',
         'PORT': '',
+        'ATOMIC_REQUEST': True,
     }
 }
 

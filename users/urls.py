@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
-from .views import register_user
+from .views import update_profile
 
 urlpatterns = [
-    url(r'', register_user, name="register"),
+    url(r'', update_profile, name="update"),
 ]

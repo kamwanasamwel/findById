@@ -1,19 +1,15 @@
 from django import forms
 from django.contrib.auth.models import User
-from getall.models import Profile
+from .models import Profile
 from django.utils.translation import ugettext_lazy as _
 
 
-class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
+class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['surname', 'idno', 'phoneNo']
-
+        fields = ('first_name', 'last_name', 'email')
 
 class ProfileForm(forms.ModelForm):
-
     class Meta:
         model = Profile
-        fields = ['FirstName','LastName','surname', 'email', 'phoneNo', 'idno']9
+        fields = ('surname', 'idno', 'phoneNo')

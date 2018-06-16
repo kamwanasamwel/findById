@@ -9,49 +9,9 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <form action="" method="post">
-        <div class="field">
-            {{ userform.surname.errors }}
-            <label for="id_surname">SurName: </label>
-            {{ userform.surname }}
-        </div>
-        <div class="field">
-            {{ userform.last_name.errors }}
-            <label for="id_last_name">Last name: </label>
-            {{ userform.last_name }}
-        </div>
-        <div class="field">
-            {{ userform.email.errors }}
-            <label for="id_email">Email: </label>
-            {{ userform.email }}
-        </div>
-        <div class="field">
-            {{ userform.username.errors }}
-            <label for="id_username">Username: </label>
-            {{ userform.username }}
-        </div>
-        <div class="field">
-            {{ userform.password.errors }}
-            <label for="id_password1">Password: </label>
-            {{ userform.password }}
-        </div>
-        <div class="field">
-            {{ userprofileform.address.errors }}
-            <label for="id_address">Address: </label>
-            {{ userprofileform.address }}
-        </div>
-        <div class="field">
-            {{ userprofileform.city.errors }}
-            <label for="id_city">City: </label>
-            {{ userprofileform.city }}
-        </div>
-        <div class="field">
-            {{ userprofileform.post.errors }}
-            <label for="id_post">Post: </label>
-            {{ userprofileform.post }}
-        </div>
-        {% csrf_token %}
-        <input type="submit" value="Submit">
+    <form method="post">
+        {% csrf_token %} {{ user_form.as_p }} {{ profile_form.as_p }}
+        <button type="submit">Save changes</button>
     </form>
 </body>
 </html>
